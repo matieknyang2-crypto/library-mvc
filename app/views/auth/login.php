@@ -9,7 +9,7 @@
             <p>Manage and explore your library collection</p>
         </div>
 
-        <form method="POST" action="/library_mvc/public/index.php?url=auth/login" id="loginForm">
+        <form method="POST" action="/library_mvc/public/index.php?url=auth/login" id="loginForm" aria-label="Login form">
             <div class="mb-3">
                 <label for="email" class="form-label">
                     <span style="font-size: 1.2rem;">📧</span> Email Address
@@ -21,7 +21,8 @@
                     name="email" 
                     placeholder="admin@library.com"
                     required
-                    autocomplete="email">
+                    autocomplete="email"
+                    aria-label="Email address">
             </div>
 
             <div class="mb-3">
@@ -36,8 +37,9 @@
                         name="password" 
                         placeholder="Enter your password"
                         required
-                        autocomplete="current-password">
-                    <button type="button" class="password-toggle" id="togglePassword">
+                        autocomplete="current-password"
+                        aria-label="Password">
+                    <button type="button" class="password-toggle" id="togglePassword" aria-label="Show password" aria-pressed="false" aria-controls="password">
                         👁️
                     </button>
                 </div>
@@ -54,7 +56,7 @@
                 </label>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100 login-btn">
+            <button type="submit" class="btn btn-primary w-100 login-btn" aria-label="Sign in to your account">
                 <span style="margin-right: 0.5rem;">🔓</span>Sign In
             </button>
         </form>
@@ -65,15 +67,15 @@
 
         <div class="login-footer">
             <p class="text-center mb-2">Don't have an account?</p>
-            <a href="/library_mvc/public/index.php?url=auth/register" class="btn btn-outline-secondary w-100">
+            <a href="/library_mvc/public/index.php?url=auth/register" class="btn btn-outline-secondary w-100" aria-label="Create a new account">
                 <span style="margin-right: 0.5rem;">✍️</span>Create Account
             </a>
         </div>
 
         <div class="login-links">
-            <a href="/library_mvc/public/index.php?url=auth/forgot">Forgot password?</a>
+            <a href="/library_mvc/public/index.php?url=auth/forgot" aria-label="Go to forgot password page">Forgot password?</a>
             <span>•</span>
-            <a href="/library_mvc/public/index.php?url=book/index">Browse Books</a>
+            <a href="/library_mvc/public/index.php?url=book/index" aria-label="Browse books catalog">Browse Books</a>
         </div>
     </div>
 
@@ -319,5 +321,7 @@ document.getElementById('togglePassword').addEventListener('click', function() {
     const isPassword = passwordInput.type === 'password';
     passwordInput.type = isPassword ? 'text' : 'password';
     this.textContent = isPassword ? '🙈' : '👁️';
+    this.setAttribute('aria-pressed', isPassword ? 'true' : 'false');
+    this.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
 });
 </script>

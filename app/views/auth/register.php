@@ -9,7 +9,7 @@
             <p>Join our library community</p>
         </div>
 
-        <form method="POST" action="/library_mvc/public/index.php?url=auth/register" id="registerForm">
+        <form method="POST" action="/library_mvc/public/index.php?url=auth/register" id="registerForm" aria-label="Registration form">
             <div class="mb-3">
                 <label for="name" class="form-label">
                     <span style="font-size: 1.2rem;">👤</span> Full Name
@@ -20,7 +20,8 @@
                     id="name" 
                     name="name" 
                     placeholder="John Doe"
-                    required>
+                    required
+                    aria-label="Full name">
             </div>
 
             <div class="mb-3">
@@ -33,7 +34,8 @@
                     id="email" 
                     name="email" 
                     placeholder="you@example.com"
-                    required>
+                    required
+                    aria-label="Email address">
             </div>
 
             <div class="mb-3">
@@ -48,8 +50,9 @@
                         name="password" 
                         placeholder="At least 6 characters"
                         required
-                        minlength="6">
-                    <button type="button" class="password-toggle" id="togglePassword">
+                        minlength="6"
+                        aria-label="Password">
+                    <button type="button" class="password-toggle" id="togglePassword" aria-label="Show password" aria-pressed="false" aria-controls="password">
                         👁️
                     </button>
                 </div>
@@ -66,8 +69,9 @@
                         id="password_confirm" 
                         name="password_confirm" 
                         placeholder="Confirm your password"
-                        required>
-                    <button type="button" class="password-toggle" id="toggleConfirmPassword">
+                        required
+                        aria-label="Confirm password">
+                    <button type="button" class="password-toggle" id="toggleConfirmPassword" aria-label="Show confirm password" aria-pressed="false" aria-controls="password_confirm">
                         👁️
                     </button>
                 </div>
@@ -79,13 +83,14 @@
                     class="form-check-input" 
                     id="agree" 
                     name="agree"
-                    required>
+                    required
+                    aria-label="Agree to terms and conditions">
                 <label class="form-check-label" for="agree">
                     I agree to the terms and conditions
                 </label>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100 login-btn">
+            <button type="submit" class="btn btn-primary w-100 login-btn" aria-label="Create account">
                 <span style="margin-right: 0.5rem;">✍️</span>Create Account
             </button>
         </form>
@@ -96,15 +101,15 @@
 
         <div class="login-footer">
             <p class="text-center mb-2">Already have an account?</p>
-            <a href="/library_mvc/public/index.php?url=auth/login" class="btn btn-outline-secondary w-100">
+            <a href="/library_mvc/public/index.php?url=auth/login" class="btn btn-outline-secondary w-100" aria-label="Go to login page">
                 <span style="margin-right: 0.5rem;">🔓</span>Sign In
             </a>
         </div>
 
         <div class="login-links">
-            <a href="/library_mvc/public/index.php?url=home/index">Home</a>
+            <a href="/library_mvc/public/index.php?url=home/index" aria-label="Go to home page">Home</a>
             <span>•</span>
-            <a href="/library_mvc/public/index.php?url=book/index">Browse Books</a>
+            <a href="/library_mvc/public/index.php?url=book/index" aria-label="Browse books catalog">Browse Books</a>
         </div>
     </div>
 </div>
@@ -294,6 +299,8 @@ document.getElementById('togglePassword').addEventListener('click', function() {
     const isPassword = passwordInput.type === 'password';
     passwordInput.type = isPassword ? 'text' : 'password';
     this.textContent = isPassword ? '🙈' : '👁️';
+    this.setAttribute('aria-pressed', isPassword ? 'true' : 'false');
+    this.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
 });
 
 document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
@@ -301,6 +308,8 @@ document.getElementById('toggleConfirmPassword').addEventListener('click', funct
     const isPassword = passwordInput.type === 'password';
     passwordInput.type = isPassword ? 'text' : 'password';
     this.textContent = isPassword ? '🙈' : '👁️';
+    this.setAttribute('aria-pressed', isPassword ? 'true' : 'false');
+    this.setAttribute('aria-label', isPassword ? 'Hide confirm password' : 'Show confirm password');
 });
 
 // Validate password match on submit

@@ -4,6 +4,31 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
+    const globalLoader = document.getElementById('globalLoader');
+
+    function showLoader() {
+        if (!globalLoader) {
+            return;
+        }
+        globalLoader.classList.add('active');
+        globalLoader.setAttribute('aria-hidden', 'false');
+    }
+
+    // Show loader for non-GET forms and for links/buttons marked with data-loading
+    document.querySelectorAll('form').forEach(function(form) {
+        form.addEventListener('submit', function() {
+            const method = (form.getAttribute('method') || 'GET').toUpperCase();
+            if (method !== 'GET') {
+                showLoader();
+            }
+        });
+    });
+
+    document.querySelectorAll('a[data-loading], button[data-loading]').forEach(function(element) {
+        element.addEventListener('click', function() {
+            showLoader();
+        });
+    });
     
     // Auto-dismiss flash messages after 5 seconds
     const flashMessages = document.querySelectorAll('.alert');

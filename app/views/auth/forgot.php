@@ -9,7 +9,7 @@
             <p>Enter your email to receive reset instructions</p>
         </div>
 
-        <form method="POST" action="/library_mvc/public/index.php?url=auth/forgot">
+        <form method="POST" action="/library_mvc/public/index.php?url=auth/forgot" aria-label="Forgot password form">
             <div class="mb-3">
                 <label for="email" class="form-label">
                     <span style="font-size: 1.2rem;">📧</span> Email Address
@@ -21,7 +21,8 @@
                     name="email" 
                     placeholder="your@example.com"
                     required
-                    autocomplete="email">
+                        autocomplete="email"
+                        aria-label="Email address">
             </div>
 
             <div class="alert alert-info" role="alert" style="margin-bottom: 1.5rem;">
@@ -29,7 +30,7 @@
                 <a href="/library_mvc/public/index.php?url=auth/login" class="alert-link">Return to login</a> to access your account.
             </div>
 
-            <button type="submit" class="btn btn-primary w-100 login-btn" disabled>
+            <button type="submit" class="btn btn-primary w-100 login-btn" aria-label="Send reset link">
                 <span style="margin-right: 0.5rem;">📧</span>Send Reset Link
             </button>
         </form>
@@ -40,15 +41,15 @@
 
         <div class="login-footer">
             <p class="text-center mb-2">Remember your password?</p>
-            <a href="/library_mvc/public/index.php?url=auth/login" class="btn btn-outline-secondary w-100">
+            <a href="/library_mvc/public/index.php?url=auth/login" class="btn btn-outline-secondary w-100" aria-label="Go back to login page">
                 <span style="margin-right: 0.5rem;">🔓</span>Sign In
             </a>
         </div>
 
         <div class="login-links">
-            <a href="/library_mvc/public/index.php?url=home/index">Home</a>
+            <a href="/library_mvc/public/index.php?url=home/index" aria-label="Go to home page">Home</a>
             <span>•</span>
-            <a href="/library_mvc/public/index.php?url=auth/register">Create Account</a>
+            <a href="/library_mvc/public/index.php?url=auth/register" aria-label="Create new account">Create Account</a>
         </div>
     </div>
 </div>

@@ -2,7 +2,7 @@
 <?php if (empty($overdue)): ?>
     <div class="alert alert-success">No overdue books. Good job!</div>
 <?php else: ?>
-    <table class="table table-bordered">
+    <table class="table table-bordered" aria-label="Overdue books table">
         <thead>
             <tr>
                 <th>Student</th>
@@ -35,5 +35,5 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <a href="/library_mvc/public/index.php?url=report/exportOverdue" class="btn btn-primary">Export as CSV</a>
+    <a href="/library_mvc/public/index.php?url=report/exportOverdue" class="btn btn-primary" aria-label="Export overdue books report as CSV">Export as CSV</a>
 <?php endif; ?>

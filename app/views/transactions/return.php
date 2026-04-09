@@ -2,7 +2,7 @@
 <?php if (empty($issued)): ?>
     <div class="alert alert-info">No books currently issued.</div>
 <?php else: ?>
-    <table class="table table-bordered">
+    <table class="table table-bordered" aria-label="Issued books table for returns">
         <thead>
             <tr>
                 <th>Student</th>
@@ -28,9 +28,9 @@
                     <?php endif; ?>
                 </td>
                 <td>
-                    <form method="POST" action="/library_mvc/public/index.php?url=transaction/return" style="display:inline;">
+                    <form method="POST" action="/library_mvc/public/index.php?url=transaction/return" style="display:inline;" aria-label="Return form for <?= htmlspecialchars($row['book_title']) ?>">
                         <input type="hidden" name="transaction_id" value="<?= $row['id'] ?>">
-                        <button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Mark as returned?')">Return</button>
+                        <button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Mark as returned?')" aria-label="Return <?= htmlspecialchars($row['book_title']) ?>">Return</button>
                     </form>
                 </td>
             </tr>

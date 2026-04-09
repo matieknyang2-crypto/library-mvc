@@ -28,7 +28,12 @@ A complete Library Management System built with PHP MVC architecture, MySQL, and
    - Import the `database.sql` file located in the project root.
 
 4. **Configure database connection**:
-   - Open `app/config/database.php` and update credentials if needed (default: root/empty).
+   - Open `app/config/database.php` and update credentials if needed.
+   - Current default project credentials are:
+     - Host: `localhost`
+     - Database: `library_mvc`
+     - Username: `library_app`
+     - Password: `LibApp@2026!`
 
 5. **Set base URL**:
    - The project assumes the base URL is `/library_mvc/public/`. If your setup differs, adjust the paths in views and controllers (e.g., in header.php links). You may need to update the `redirect()` method in BaseController to use proper base URL.

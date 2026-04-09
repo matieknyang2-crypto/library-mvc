@@ -8,10 +8,13 @@
     <link rel="stylesheet" href="/library_mvc/public/css/style.css">
 </head>
 <body>
+    <div id="globalLoader" class="global-loader" aria-hidden="true">
+        <div class="spinner-border text-light" role="status" aria-label="Loading"></div>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/library_mvc/public/index.php?url=home/index">📚 Library MVC</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation" aria-controls="navbarNav" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -38,6 +41,60 @@
         </div>
     </nav>
     <div class="container mt-4">
+        <?php
+            $currentUrl = $_GET['url'] ?? 'home/index';
+            $urlParts = array_values(array_filter(explode('/', trim($currentUrl, '/'))));
+            $labelMap = [
+                'home' => 'Home',
+                'dashboard' => 'Dashboard',
+                'book' => 'Books',
+                'category' => 'Categories',
+                'transaction' => 'Transactions',
+                'report' => 'Reports',
+                'user' => 'Users',
+                'auth' => 'Authentication',
+                'index' => 'Overview',
+                'create' => 'Create',
+                'edit' => 'Edit',
+                'show' => 'Details',
+                'issue' => 'Issue',
+                'return' => 'Return',
+                'overdue' => 'Overdue',
+                'export' => 'Export',
+                'login' => 'Login',
+                'register' => 'Register',
+                'forgot' => 'Forgot Password',
+                'logout' => 'Logout'
+            ];
+
+            $renderParts = [];
+            foreach ($urlParts as $partIndex => $part) {
+                // Avoid duplicate "Home" in breadcrumb when URL starts with home/index.
+                if ($partIndex === 0 && $part === 'home') {
+                    continue;
+                }
+
+                $renderParts[] = [
+                    'part' => $part,
+                    'path' => implode('/', array_slice($urlParts, 0, $partIndex + 1))
+                ];
+            }
+        ?>
+        <nav class="app-breadcrumb" aria-label="Breadcrumb">
+            <ol class="breadcrumb mb-3">
+                <li class="breadcrumb-item"><a href="/library_mvc/public/index.php?url=home/index">Home</a></li>
+                <?php foreach ($renderParts as $index => $node):
+                    $label = $labelMap[$node['part']] ?? ucfirst($node['part']);
+                    $isLast = $index === (count($renderParts) - 1);
+                ?>
+                    <?php if ($isLast): ?>
+                        <li class="breadcrumb-item active" aria-current="page"><?= htmlspecialchars($label) ?></li>
+                    <?php else: ?>
+                        <li class="breadcrumb-item"><a href="/library_mvc/public/index.php?url=<?= htmlspecialchars($node['path']) ?>"><?= htmlspecialchars($label) ?></a></li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </ol>
+        </nav>
         <?php if (isset($_SESSION['flash'])): ?>
             <div class="alert alert-<?= $_SESSION['flash']['type'] ?> alert-dismissible fade show" role="alert">
                 <?= $_SESSION['flash']['message'] ?>

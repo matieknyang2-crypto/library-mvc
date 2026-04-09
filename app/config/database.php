@@ -3,8 +3,8 @@
 class Database {
     private $host = 'localhost';
     private $db_name = 'library_mvc';
-    private $username = 'root';
-    private $password = '';
+    private $username = 'library_app';
+    private $password = 'LibApp@2026!';
     private $conn;
 
     public function getConnection() {

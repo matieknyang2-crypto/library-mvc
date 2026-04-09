@@ -10,12 +10,20 @@
 <div class="row mb-4">
     <div class="col-12">
         <div class="section-card">
-            <div class="section-title">📤 Your Issued Books</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                <div class="section-title" style="margin-bottom: 0;">📤 Your Issued Books</div>
+                <a href="/library_mvc/public/index.php?url=book/index" class="btn btn-outline-primary" aria-label="Browse books from student dashboard">
+                    Browse Books
+                </a>
+            </div>
             
             <?php if (empty($issued_books)): ?>
                 <div class="alert alert-info" role="alert">
                     <strong>No issued books yet!</strong> Browse our collection to find interesting reads.
                 </div>
+                <a href="/library_mvc/public/index.php?url=book/index" class="btn btn-primary" aria-label="Browse books when no books are issued">
+                    <span style="margin-right: 0.5rem;">📚</span>Browse Available Books
+                </a>
             <?php else: ?>
                 <div class="table-responsive">
                     <table class="table">
@@ -39,7 +47,11 @@
                                     $badge_text = $days_left < 0 ? 'Overdue' : ($days_left < 3 ? 'Due Soon' : 'On Track');
                                 ?>
                                 <tr>
-                                    <td><strong><?= htmlspecialchars($book['book_title']) ?></strong></td>
+                                    <td>
+                                        <a href="/library_mvc/public/index.php?url=book/show/<?= $book['book_id'] ?>" aria-label="View details for <?= htmlspecialchars($book['book_title']) ?>">
+                                            <strong><?= htmlspecialchars($book['book_title']) ?></strong>
+                                        </a>
+                                    </td>
                                     <td><?= htmlspecialchars($book['author']) ?></td>
                                     <td><?= $book['issue_date'] ?></td>
                                     <td><?= $book['due_date'] ?></td>

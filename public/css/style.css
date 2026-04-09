@@ -15,6 +15,16 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Keyboard visibility for accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #0891b2;
+    outline-offset: 2px;
+}
+
 .navbar {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     background: linear-gradient(90deg, #1f2937 0%, #111827 100%);
@@ -24,6 +34,38 @@ body {
     font-weight: 700;
     font-size: 1.5rem;
     letter-spacing: -0.5px;
+}
+
+.app-breadcrumb .breadcrumb {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid #e5e7eb;
+}
+
+.app-breadcrumb .breadcrumb-item,
+.app-breadcrumb .breadcrumb-item a {
+    font-size: 0.9rem;
+    color: #374151;
+}
+
+.app-breadcrumb .breadcrumb-item.active {
+    font-weight: 600;
+    color: #111827;
+}
+
+.global-loader {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(17, 24, 39, 0.55);
+    z-index: 2000;
+}
+
+.global-loader.active {
+    display: flex;
 }
 
 /* Dashboard Stats Cards */
@@ -300,5 +342,9 @@ body {
     
     .quick-actions {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .app-breadcrumb .breadcrumb {
+        padding: 0.5rem 0.75rem;
     }
 }

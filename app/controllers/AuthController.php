@@ -79,14 +79,38 @@ class AuthController extends BaseController {
     }
 
     public function logout() {
-        session_destroy();
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+
         $_SESSION['flash'] = ['type' => 'success', 'message' => 'Logout successful. See you soon!'];
+        unset($_SESSION['user_id'], $_SESSION['user_name'], $_SESSION['user_role']);
         $this->redirect('/library_mvc/public/index.php?url=home/index');
     }
 
     public function forgot() {
-        // This is a demo - password reset would require email functionality
-        $this->view('auth/forgot');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = trim($_POST['email'] ?? '');
+
+            if (empty($email)) {
+                $_SESSION['flash'] = ['type' => 'danger', 'message' => 'Please enter your email address.'];
+                $this->redirect('/library_mvc/public/index.php?url=auth/forgot');
+                return;
+            }
+
+            $userModel = new User();
+            $user = $userModel->findByEmail($email);
+
+            if ($user) {
+                $_SESSION['flash'] = ['type' => 'success', 'message' => 'If this email exists in our system, a reset link has been sent.'];
+            } else {
+                $_SESSION['flash'] = ['type' => 'info', 'message' => 'If this email exists in our system, a reset link has been sent.'];
+            }
+
+            $this->redirect('/library_mvc/public/index.php?url=auth/login');
+        } else {
+            $this->view('auth/forgot');
+        }
     }
 }
 ?>
