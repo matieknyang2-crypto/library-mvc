@@ -35,5 +35,4 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <a href="/library_mvc/public/index.php?url=report/exportOverdue" class="btn btn-primary" aria-label="Export overdue books report as CSV">Export as CSV</a>
 <?php endif; ?>
